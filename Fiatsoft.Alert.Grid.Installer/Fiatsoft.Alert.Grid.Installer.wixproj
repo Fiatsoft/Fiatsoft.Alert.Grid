@@ -1,0 +1,23 @@
+﻿<Project Sdk="WixToolset.Sdk/5.0.2">
+  <PropertyGroup>
+    <DefineConstants>Config=$(Configuration);ProductName=Fiatsoft.Alert.Grid</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Fiatsoft.Company.Temporary.Branding.Logo.Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EULA.rtf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LICENSE.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fiatsoft.Alert.Grid.csproj" />
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="certutil -hashfile &quot;bin\x64\$(Configuration)\en-US\Fiatsoft.Alert.Grid.Installer.msi&quot; SHA1  | findstr /v &quot;CertUtil&quot; | findstr /v &quot;SHA1 hash of bin\x64\$(Configuration)\en-US\Fiatsoft.Alert.Grid.Installer.msi:&quot; &gt;&quot;bin\x64\$(Configuration)\en-US\Fiatsoft.Alert.Grid.Installer.msi.sha256.txt&quot;&#xD;&#xA;REM gpg --yes --batch --armor --output &quot;bin\x64\$(Configuration)\en-US\Fiatsoft.Alert.Grid.Installer.msi.sha256.txt.sig&quot; --detach-sign &quot;bin\x64\$(Configuration)\en-US\Fiatsoft.Alert.Grid.Installer.msi.sha256.txt&quot;" />
+  </Target>
+</Project>
