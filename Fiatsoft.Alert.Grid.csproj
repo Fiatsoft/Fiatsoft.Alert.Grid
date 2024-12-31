@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fiatsoft.Company.Temporary.Branding.Logo.Icon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="Themes\" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="taskkill /F /IM Fiatsoft.Alert.Grid.exe /T /fi &quot;pid gt 0&quot; 2&gt;&amp;1 | exit /B 0" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;&amp; { Compress-Archive -Force -Path 'bin\$(Configuration)\net8.0-windows\Fiatsoft.Alert.Grid.dll', 'bin\$(Configuration)\net8.0-windows\Fiatsoft.Alert.Grid.dll.config', 'bin\$(Configuration)\net8.0-windows\Fiatsoft.Alert.Grid.exe', 'bin\$(Configuration)\net8.0-windows\Fiatsoft.Alert.Grid.runtimeconfig.json', 'bin\$(Configuration)\net8.0-windows\Hardcodet.NotifyIcon.Wpf.dll', 'bin\$(Configuration)\net8.0-windows\Newtonsoft.Json.dll', 'Fiatsoft.Alert.Grid.Installer\EULA.rtf' -DestinationPath 'bin\$(Configuration)\net8.0-windows\Fiatsoft.Alert.Grid.zip' }&quot;&#xD;&#xA;certutil -hashfile &quot;bin\$(Configuration)\net8.0-windows\Fiatsoft.Alert.Grid.zip&quot; SHA1 | findstr /v &quot;CertUtil&quot; | findstr /v &quot;SHA1 hash of bin\$(Configuration)\net8.0-windows\Fiatsoft.Alert.Grid.zip:&quot; &gt;&quot;bin\$(Configuration)\net8.0-windows\Fiatsoft.Alert.Grid.zip.sha256.txt&quot;&#xD;&#xA;REM gpg --yes --batch --armor --output &quot;bin\$(Configuration)\net8.0-windows\Fiatsoft.Alert.Grid.zip.sha256.txt.sig&quot; --detach-sign &quot;bin\$(Configuration)\net8.0-windows\Fiatsoft.Alert.Grid.zip.sha256.txt&quot;&#xD;&#xA;" />
+  </Target>
+</Project>
