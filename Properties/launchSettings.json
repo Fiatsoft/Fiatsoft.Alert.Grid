@@ -1,0 +1,35 @@
+{
+  "profiles": {
+    "thunderbird pull with schema": {
+      "commandName": "Project",
+      "commandLineArgs": "-mode pull -Topic \"support@fiatsoft.com\" -schema \"['From', 'Subject']\" -sound \"%windir%\\media\\Alarm03.wav\" -DefaultAction \"\"\"C:\\Program Files\\Mozilla\\Thunderbird\\thunderbird.exe\"\" -folder \"\"imap://support@fiatsoft.com/Inbox\"\"\" From example@example.example Subject \"Love Letter\""
+    },
+    "thunderbird pull with schema and pre-scripted alert": {
+      "commandName": "Project",
+      "commandLineArgs": "-mode pull -Topic \"support@fiatsoft.com\" -sound \"%windir%\\media\\Alarm03.wav\" -DefaultAction \"\"\"C:\\Program Files\\Mozilla\\Thunderbird\\thunderbird.exe\"\" -folder \"\"imap://support@fiatsoft.com/Inbox\"\"\" From example@example.example Subject \"Love Letter\""
+    },
+    "thuderbird push": {
+      "commandName": "Project",
+      "commandLineArgs": "-mode push -Topic \"support@fiatsoft.com\" -action \"\"\"C:\\Program Files\\Mozilla Thunderbird\\thunderbird.exe\"\" mid:%MESSAGEID%\" From example@example.example Subject \"Love Letter\""
+    },
+    "thuderbird unintentional-pull (intended push)": {
+      "commandName": "Project",
+      "commandLineArgs": "-mode pull -Topic \"support@fiatsoft.com\" -action \"\"\"C:\\Program Files\\Mozilla Thunderbird\\thunderbird.exe\"\" mid:%MESSAGEID%\" From example@example.example Subject \"Love Letter\""
+    },
+    "(empty)": {
+      "commandName": "Project"
+    },
+    "thunderbird pull (missing schema)": {
+      "commandName": "Project",
+      "commandLineArgs": "-mode pull -Topic \"support@fiatsoft.com\" -sound \"%windir%\\media\\Alarm03.wav\" -DefaultAction \"\"\"C:\\Program Files\\Mozilla\\Thunderbird\\thunderbird.exe\"\" -folder \"\"imap://support@fiatsoft.com/Inbox\"\"\" "
+    },
+    "very-long topic name, for daemon with message": {
+      "commandName": "Project",
+      "commandLineArgs": "-mode pull -Topic \"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXABCDEFGHIJKLMNOPQRSTUVWXYZ\" -sound \"%windir%\\media\\Alarm03.wav\" -DefaultAction \"\"\"C:\\Program Files\\Mozilla\\Thunderbird\\thunderbird.exe\"\" -folder \"\"imap://support@fiatsoft.com/Inbox\"\"\" From example@example.example Subject \"Love Letter\""
+    },
+    "excessively-long topic name, for daemon with message": {
+      "commandName": "Project",
+      "commandLineArgs": "-mode pull -Topic \"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXABCDEFGHIJKLMNOPQRSTUVWXYZ.DefinatelyTooLongNow\" -sound \"%windir%\\media\\Alarm03.wav\" -DefaultAction \"\"\"C:\\Program Files\\Mozilla\\Thunderbird\\thunderbird.exe\"\" -folder \"\"imap://support@fiatsoft.com/Inbox\"\"\" From example@example.example Subject \"Love Letter\""
+    }
+  }
+}
