@@ -173,4 +173,4 @@ This project makes use of the following third-party libraries/tools:
 
 See [LICENSE.md](LICENSE.md) for licensing information.
 
-Copyright (c) 2024 `fiatsoft.com.`.
+Copyright (c) 2024-2025 `fiatsoft.com.`.
